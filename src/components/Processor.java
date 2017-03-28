@@ -32,15 +32,31 @@ public class Processor {
 			switch(cmd){
 			
 			case "REGISTER":
-				
-				break;
+				String username = args.get("params");
+				if(username.equals("")){
+					return "Enter a name.";
+				} else {
+					isRunning = true;
+					return "Hello "+username+", welcome to DragonSMS";
+				}
 			case "START":
-				isRunning = true;
-				break;
+				if(isRunning()){
+					
+				} else {
+					return "Session not started. Use the command REGISTER <NAME>";
+				}
 			case "HINT":
-				break;
+				if(isRunning()){
+					
+				} else {
+					return "Session not started. Use the command REGISTER <NAME>";
+				}
 			case "GO":
-				break;
+				if(isRunning()){
+					
+				} else {
+					return "Session not started. Use the command REGISTER <NAME>";
+				}
 			}
 			
 		}
