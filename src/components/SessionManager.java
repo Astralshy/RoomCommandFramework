@@ -6,7 +6,6 @@ import annotations.Regex;
 
 public class SessionManager {
 
-	private String name;
 	private Processor p;
 	
 	public SessionManager(){

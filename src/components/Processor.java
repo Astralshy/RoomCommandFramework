@@ -8,6 +8,7 @@ public class Processor {
 	private SessionManager instance;
 	private String currentRoom;
 	private String state;
+	private String name;
 	private boolean isRunning = false;
 	private boolean isRegistered = false;
 	private ArrayList<String> commands;
