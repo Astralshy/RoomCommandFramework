@@ -2,6 +2,9 @@ package components;
 
 import java.util.HashMap;
 
+import org.springframework.context.support.AbstractApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 import annotations.Regex;
 import validation.RegexValidator;
 
@@ -36,7 +39,10 @@ public class SessionManager {
 	
 	public void export(){
 		
-		//logic for saving session to .txt file or DB
+		AbstractApplicationContext ctx;
+    	
+        // load application context files
+        ctx = new ClassPathXmlApplicationContext(new String []{"applicationContext.xml", "applicationContext-jpa.xml"});
 		
 	}
 	
