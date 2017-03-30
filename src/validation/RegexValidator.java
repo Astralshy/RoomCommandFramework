@@ -32,7 +32,7 @@ public class RegexValidator implements ValidationHandler {
 			if(list[0].equals("GO")){
 				
 				//TODO: Validate Room<N> formatting
-				if(list[1].matches("([rR]oom(\\d{1}))")){
+				if(list[1].matches("([rR]oom[1-5])")){
 					list[1] = (Character.toString((list[1].charAt(0)))).toUpperCase() + list[1].substring(1).toLowerCase();
 				}
 				else{
