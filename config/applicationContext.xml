@@ -65,7 +65,7 @@
         The most commonly used annotation is @Autowired, which instructs Spring to
         dependency inject an object into your class.
     -->
-    <context:component-scan base-package="app">
+    <context:component-scan base-package="database">
     </context:component-scan>
     
      <!-- CONFIGURE YOUR DATA SOURCE -->
@@ -95,7 +95,7 @@
     </bean>
 
     <!-- SPRING DATA JPA REPOSITORY SUPPORT -->
-    <jpa:repositories base-package="app.repositories" />
+    <jpa:repositories base-package="database.repositories" />
 
     <!-- CONFIGURE TRANSACTION MANAGEMENT -->
     <bean class="org.springframework.orm.jpa.JpaTransactionManager" id="transactionManager">

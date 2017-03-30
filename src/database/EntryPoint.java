@@ -1,4 +1,4 @@
-package app;
+package database;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,8 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 
-import app.entity.User;
-import app.repositories.UserRepository;
+import database.entity.User;
+import database.repositories.UserRepository;
 
 @Component
 public class EntryPoint {
