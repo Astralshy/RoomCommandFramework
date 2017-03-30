@@ -3,6 +3,7 @@ package components;
 import java.util.HashMap;
 
 import annotations.Regex;
+import validation.RegexValidator;
 
 public class SessionManager {
 
@@ -16,10 +17,11 @@ public class SessionManager {
 	@Regex
 	public String process(String cmd){
 		String status;
-		String[] processedString = cmd.split(" ");
-		if(processedString.length > 2){
-			status = "Input does not follow the proper format";
+		
+		if(cmd.equals(RegexValidator.INVALID)){
+			status = "Invalid Input";
 		} else {
+			String[] processedString = cmd.split(" ");
 			HashMap<String,String> args = new HashMap<String,String>();
 			args.put("cmd", processedString[0]);
 			if(processedString.length == 2){

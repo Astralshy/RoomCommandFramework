@@ -35,13 +35,14 @@ public class Processor {
 			case "REGISTER":
 				String username = args.get("params");
 				if(username.equals("")){
-					return "Enter a name.";
+					return "<NAME> Missing. Use the command REGISTER <NAME>";
 				} else {
 					isRunning = true;
 					return "Hello "+username+", welcome to DragonSMS";
 				}
 			case "START":
 				if(isRunning()){
+					
 					
 				} else {
 					return "Session not started. Use the command REGISTER <NAME>";
