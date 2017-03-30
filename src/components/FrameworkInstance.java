@@ -52,8 +52,6 @@ public class FrameworkInstance {
 					m.setAccessible(true);
 					
 					if(m.isAnnotationPresent(Logic.class)){
-						
-						
 						m.invoke(o);
 						return;
 					}
