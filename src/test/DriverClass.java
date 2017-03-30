@@ -23,7 +23,7 @@ public class DriverClass {
 		//Session starts
 		while(true){
 			String s = sm.process(sc.nextLine());
-			System.out.println(s);
+			System.out.print(s);
 			
 			if(!sm.isRunning() && sm.isRegistered()){
 				

@@ -80,12 +80,12 @@ public class Processor {
 			case "REGISTER":
 				name = args.get("params");
 				if(name.equals("")){
-					return "<NAME> Missing. Use the command REGISTER <NAME>";
+					return "<NAME> Missing. Use the command REGISTER <NAME>\n";
 				} else {
 					startDB();
 					isRunning = true;
 					if(isNew){
-					return "Hello "+name+", welcome to DragonSMS";
+					return "Hello "+name+", welcome to DragonSMS\n";
 					}
 					else{
 						if(!currentRoom.equals("Room1")){
@@ -108,7 +108,7 @@ public class Processor {
 					return (String)output.get("message");
 					
 				} else {
-					return "Session not started. Use the command REGISTER <NAME>";
+					return "Session not started. Use the command REGISTER <NAME>\n";
 				}
 			case "HINT":
 				if(isRunning()){
@@ -123,7 +123,7 @@ public class Processor {
 						return (String)output.get("message");
 					}
 				} else {
-					return "Session not started. Use the command REGISTER <NAME>";
+					return "Session not started. Use the command REGISTER <NAME>\n";
 				}
 			case "GO":
 				if(isRunning()){
@@ -132,14 +132,14 @@ public class Processor {
 					currentRoom = args.get("params");
 					return (String)output.get("message");
 				} else {
-					return "Session not started. Use the command REGISTER <NAME>";
+					return "Session not started. Use the command REGISTER <NAME>\n";
 				}
 			case "EXIT":
 				if(isRunning()){
 					isRunning = false;
-					return "Session ended. Thank you for playing, " + name + "!";
+					return "Session ended. Thank you for playing, " + name + "!\n";
 				} else {
-					return "Session not started. Use the command REGISTER <NAME>";
+					return "Session not started. Use the command REGISTER <NAME>\n";
 				}
 			default:
 				try{
@@ -149,7 +149,7 @@ public class Processor {
 				}
 				catch(Exception e){
 					
-					return "Command not recognized.";
+					return "Command not recognized.\n";
 					
 				}
 				
