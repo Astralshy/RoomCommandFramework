@@ -2,6 +2,7 @@ package validation;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import annotations.Regex;
@@ -9,9 +10,18 @@ import annotations.Regex;
 @ValidationAnnotation(target = Regex.class)
 public class RegexValidator implements ValidationHandler {
 
-	private String[] commands = {"GO","REGISTER","START","HINT","EXIT"};
+	private ArrayList<String> commands = new ArrayList<String>();
 	public static String INVALID = "INVALID";
 	
+	public RegexValidator(){
+		
+		commands.add("GO");
+		commands.add("REGISTER");
+		commands.add("START");
+		commands.add("HINT");
+		commands.add("EXIT");
+		
+	}
 	
 	@Override
 	public void process(Object o, Method m, Object[] args) throws Exception {
@@ -24,14 +34,14 @@ public class RegexValidator implements ValidationHandler {
 			
 			String[] list = cmd.split(" ");
 			
-			
-			list[0] = list[0].toUpperCase();
+			if(commands.contains(list[0].toUpperCase())){
+				list[0] = list[0].toUpperCase();
+			}
 			
 			String cleanString = list[0] + " ";
 			
 			if(list[0].equals("GO")){
 				
-				//TODO: Validate Room<N> formatting
 				if(list[1].matches("(?i)(room[1-5])")){
 					list[1] = (Character.toString((list[1].charAt(0)))).toUpperCase() + list[1].substring(1).toLowerCase();
 				}
@@ -49,8 +59,6 @@ public class RegexValidator implements ValidationHandler {
 				cleanString += list[1];
 				
 			}
-			
-			System.out.println(cleanString);
 			
 			args[0] = cleanString;
 			return;

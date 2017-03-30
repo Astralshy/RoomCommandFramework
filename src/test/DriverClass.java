@@ -24,6 +24,12 @@ public class DriverClass {
 		while(true){
 			String s = sm.process(sc.nextLine());
 			System.out.println(s);
+			
+			if(!sm.isRunning() && sm.isRegistered()){
+				
+				break;
+				
+			}
 		}
 	}
 	

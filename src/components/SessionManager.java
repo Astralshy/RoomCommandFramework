@@ -40,6 +40,12 @@ public class SessionManager {
 		
 	}
 	
+	public boolean isRegistered(){
+		
+		return p.isRegistered();
+		
+	}
+	
 	public boolean isRunning(){
 		
 		return p.isRunning();
