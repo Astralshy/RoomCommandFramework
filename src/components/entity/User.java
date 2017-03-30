@@ -1,4 +1,4 @@
-package database.entity;
+package components.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,31 +18,42 @@ public class User {
 	private String name;
 	
 	@Column
-	private Integer age;
+	private Integer state;
 	
 	@Column
-	private String address;
-	
+	private String currentRoom;
+
 	public Long getId() {
 		return id;
 	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public void setAge(Integer age) {
-		this.age = age;
-	}
+
 	public String getName() {
 		return name;
 	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getAddress() {
-		return address;
+
+	public Integer getState() {
+		return state;
 	}
-	public void setAddress(String address) {
-		this.address = address;
+
+	public void setState(Integer state) {
+		this.state = state;
 	}
+
+	public String getCurrentRoom() {
+		return currentRoom;
+	}
+
+	public void setCurrentRoom(String currentRoom) {
+		this.currentRoom = currentRoom;
+	}
+	
 	
 }

@@ -27,11 +27,11 @@ public class DriverClass {
 			
 			if(!sm.isRunning() && sm.isRegistered()){
 				
+				
 				break;
 				
 			}
 		}
-		
 		sm.export();
 	}
 	

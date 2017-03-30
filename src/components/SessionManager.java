@@ -2,11 +2,17 @@ package components;
 
 import java.util.HashMap;
 
+import javax.annotation.PostConstruct;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.stereotype.Component;
 
 import annotations.Regex;
+import components.repositories.UserRepository;
 import validation.RegexValidator;
+
 
 public class SessionManager {
 
@@ -14,8 +20,9 @@ public class SessionManager {
 	
 	public SessionManager(){
 
-		p = new Processor(this);
+		p = new Processor();
 	}
+	
 	
 	@Regex
 	public String process(String cmd){
@@ -45,6 +52,7 @@ public class SessionManager {
         ctx = new ClassPathXmlApplicationContext(new String []{"applicationContext.xml", "applicationContext-jpa.xml"});
 		
 	}
+
 	
 	public boolean isRegistered(){
 		

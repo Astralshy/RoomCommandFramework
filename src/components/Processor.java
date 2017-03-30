@@ -4,23 +4,71 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.annotation.PostConstruct;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
+import org.springframework.context.support.AbstractApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.stereotype.Component;
+
+import components.entity.User;
+import components.repositories.UserRepository;
 import room.RoomCommandManager;
 
+@Component
 public class Processor {
 
-	private SessionManager instance;
-	private String currentRoom;
-	private int state;
-	private String name;
-	private boolean isRunning = false;
-	private boolean isRegistered = false;
-	private ArrayList<String> commands;
+	private static String currentRoom;
+	private static int state;
+	private static String name;
+	private static boolean isRunning = false;
+	private static boolean isRegistered = false;
+	private static boolean isNew = true;
 	private RoomCommandManager rm = new RoomCommandManager();
 	
-	public Processor(SessionManager sm){
+	@Autowired
+	UserRepository rp;
+	
+	@PostConstruct
+	public void run(){
 		
-		instance = sm;
-		commands = new ArrayList<String>();
+		if(!isRegistered){
+			
+			
+			if(rp.findByName(name).size() == 0){
+				isNew = true;
+			}
+			else{
+				User u = rp.findByName(name).get(0);
+				isNew = false;
+				state = u.getState();
+				currentRoom = u.getCurrentRoom();
+				
+			}
+			isRegistered = true;
+		}
+		else{
+			
+			
+			if(!isNew){
+				User u = rp.findByName(name).get(0);
+				u.setState(state);
+				u.setCurrentRoom(currentRoom);
+				rp.saveAndFlush(u);
+			}
+			else{
+				User u = new User();
+				u.setName(name);
+				u.setState(state);
+				u.setCurrentRoom(currentRoom);
+				rp.saveAndFlush(u);
+				
+			}
+			
+			
+		}
+		
+		
 	}
 	
 	public String run(HashMap<String,String> args){
@@ -34,9 +82,23 @@ public class Processor {
 				if(name.equals("")){
 					return "<NAME> Missing. Use the command REGISTER <NAME>";
 				} else {
+					startDB();
 					isRunning = true;
-					isRegistered = true;
+					if(isNew){
 					return "Hello "+name+", welcome to DragonSMS";
+					}
+					else{
+						if(!currentRoom.equals("Room1")){
+							output = rm.processRoom(currentRoom, state, "look");
+							state = (int)output.get("status");
+						}
+						else{
+							output = rm.processRoom(currentRoom, state, "checkRoom");
+							state = (int)output.get("status");
+						}
+					return "Hello "+name+", welcome back to DragonSMS \n" + output.get("message");
+						
+					}
 				}
 			case "START":
 				if(isRunning()){
@@ -114,4 +176,16 @@ public class Processor {
 		return isRegistered;
 	}
 	
+	private void startDB(){
+		
+		AbstractApplicationContext ctx;
+    	
+        // load application context files
+        ctx = new ClassPathXmlApplicationContext(new String []{"applicationContext.xml", "applicationContext-jpa.xml"});
+		ctx.close();
+	}
+	
+	
+	
+	 
 }
