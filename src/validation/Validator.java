@@ -12,7 +12,7 @@ import io.github.lukehutch.fastclasspathscanner.scanner.ScanResult;
 
 public class Validator 
 {
-	private HashMap<Class<?>, ValidationHandler> map = new HashMap<Class<?>,ValidationHandler>();
+	private HashMap<Class<?>, Handler> map = new HashMap<Class<?>,Handler>();
 	
 	
 	public Validator() throws Exception
@@ -20,15 +20,15 @@ public class Validator
 		// init map by scanning
 		//System.out.println(RegexValidator.class.getCanonicalName());
 		ScanResult results = new FastClasspathScanner("validation").scan();		
-		List<String> allResults = results.getNamesOfClassesWithAnnotation(ValidationAnnotation.class);
+		List<String> allResults = results.getNamesOfClassesWithAnnotation(ValidationTarget.class);
 		//System.out.println(allResults);
 		//System.out.println(results.getNamesOfAllClasses());
 		for (String s : allResults)
 		{
 			Class<?> c = Class.forName(s);
-			ValidationAnnotation va = (ValidationAnnotation) c.getAnnotation(ValidationAnnotation.class);				
+			ValidationTarget va = (ValidationTarget) c.getAnnotation(ValidationTarget.class);				
 			//System.out.println(va);				
-			map.put(va.target(), (ValidationHandler) c.newInstance());
+			map.put(va.target(), (Handler) c.newInstance());
 		}
 	
 	}
@@ -38,14 +38,14 @@ public class Validator
 		// init map by scanning
 		//System.out.println("valid");
 		ScanResult results = new FastClasspathScanner(path).scan();		
-		List<String> allResults = results.getNamesOfClassesWithAnnotation(ValidationAnnotation.class);
+		List<String> allResults = results.getNamesOfClassesWithAnnotation(ValidationTarget.class);
 		System.out.println(allResults);
 		for (String s : allResults)
 		{
 			Class<?> c = Class.forName(s);
-			ValidationAnnotation va = (ValidationAnnotation) c.getAnnotation(ValidationAnnotation.class);				
+			ValidationTarget va = (ValidationTarget) c.getAnnotation(ValidationTarget.class);				
 			//System.out.println(va);				
-			map.put(va.target(), (ValidationHandler) c.newInstance());
+			map.put(va.target(), (Handler) c.newInstance());
 		}
 	
 	}
@@ -59,7 +59,7 @@ public class Validator
 		for (Annotation a : alist)
 		{
 			//System.out.println(a.annotationType().getName());
-			ValidationHandler vh = map.get(a.annotationType());
+			Handler vh = map.get(a.annotationType());
 			if (vh!=null)
 			{
 				vh.process(o, m, args);

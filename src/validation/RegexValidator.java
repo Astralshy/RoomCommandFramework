@@ -7,8 +7,8 @@ import java.util.HashMap;
 
 import annotations.Regex;
 
-@ValidationAnnotation(target = Regex.class)
-public class RegexValidator implements ValidationHandler {
+@ValidationTarget(target = Regex.class)
+public class RegexValidator implements Handler {
 
 	private ArrayList<String> commands = new ArrayList<String>();
 	public static String INVALID = "INVALID";
