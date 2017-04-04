@@ -2,15 +2,7 @@ package components;
 
 import java.util.HashMap;
 
-import javax.annotation.PostConstruct;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.support.AbstractApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.stereotype.Component;
-
 import annotations.Regex;
-import components.repositories.UserRepository;
 import validation.RegexValidator;
 
 
@@ -44,15 +36,15 @@ public class SessionManager {
 		return status;
 	}
 	
-	public void export(){
-		
-		AbstractApplicationContext ctx;
-    	
-        // load application context files
-        ctx = new ClassPathXmlApplicationContext(new String []{"applicationContext.xml", "applicationContext-jpa.xml"});
-		
+	public HashMap<String,Object> export(){
+		return p.export();
 	}
 
+	public void importUser(HashMap<String,Object> args){
+		
+		p.importUser(args);
+		
+	}
 	
 	public boolean isRegistered(){
 		
@@ -63,6 +55,35 @@ public class SessionManager {
 	public boolean isRunning(){
 		
 		return p.isRunning();
+		
+	}
+	
+	public void toggleRegistered(){
+		
+		p.toggleRegistered();
+		
+	}
+	
+	public String getName(){
+		
+		return p.getName();
+	}
+	
+	public boolean isNew(){
+		
+		return p.isNew();
+		
+	}
+	
+	public void toggleRunning(){
+		
+		p.toggleRunning();
+		
+	}
+	
+	public void toggleNew(){
+		
+		p.toggleNew();
 		
 	}
 }

@@ -41,9 +41,16 @@ public class RegexValidator implements Handler {
 			String cleanString = list[0] + " ";
 			
 			if(list[0].equals("GO")){
-				
-				if(list[1].matches("(?i)(room[1-5])")){
-					list[1] = (Character.toString((list[1].charAt(0)))).toUpperCase() + list[1].substring(1).toLowerCase();
+				if(list.length > 1){
+					if(list[1].matches("(?i)(room[1-5])")){
+						list[1] = (Character.toString((list[1].charAt(0)))).toUpperCase() + list[1].substring(1).toLowerCase();
+					}
+					else{
+						
+						args[0] = this.INVALID;
+						return;
+						
+					}
 				}
 				else{
 					
