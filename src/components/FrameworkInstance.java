@@ -22,7 +22,7 @@ public class FrameworkInstance {
 	
 	public FrameworkInstance(String path){
 		
-		ScanResult results = new FastClasspathScanner(path).scan();		
+		ScanResult results = new FastClasspathScanner(path,"annotattions").scan();		
 		List<String> allResults = results.getNamesOfClassesWithAnnotation(Driver.class);
 		try{
 			v = new Validator();
