@@ -1,4 +1,4 @@
-package smsframework.test.entity;
+package solution.db.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

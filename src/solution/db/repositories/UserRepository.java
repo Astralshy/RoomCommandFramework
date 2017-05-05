@@ -1,4 +1,4 @@
-package smsframework.test.repositories;
+package solution.db.repositories;
 
 import java.util.List;
 
@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import smsframework.test.entity.User;
+import solution.db.entity.User;
 
 
 @Repository
