@@ -2,27 +2,27 @@ package solution.states;
 
 public class NotRegisteredState implements State {
 	@Override
-	public void RegisterCommand() {
+	public void registerCommand() {
 		
 	}
 	
 	@Override
-	public void StartCommand() {
+	public void startCommand() {
 		System.out.println("Session not started. Use the command REGISTER <NAME>");
 	}
 
 	@Override
-	public void GoCommand() {
+	public void goCommand() {
 		System.out.println("Session not started. Use the command REGISTER <NAME>");
 	}
 
 	@Override
-	public void GenericCommand() {
+	public void genericCommand() {
 		System.out.println("Session not started. Use the command REGISTER <NAME>");
 	}
 
 	@Override
-	public void HintCommand() {
+	public void hintCommand() {
 		System.out.println("Session not started. Use the command REGISTER <NAME>");
 	}
 }

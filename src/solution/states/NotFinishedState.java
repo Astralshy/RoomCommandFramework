@@ -2,27 +2,27 @@ package solution.states;
 
 public class NotFinishedState implements State{
 	@Override
-	public void RegisterCommand() {
+	public void registerCommand() {
 		
 	}
 
 	@Override
-	public void StartCommand() {
+	public void startCommand() {
 		
 	}
 
 	@Override
-	public void GoCommand() {
+	public void goCommand() {
 		
 	}
 
 	@Override
-	public void GenericCommand() {
+	public void genericCommand() {
 		
 	}
 
 	@Override
-	public void HintCommand() {
+	public void hintCommand() {
 		
 	}
 }
