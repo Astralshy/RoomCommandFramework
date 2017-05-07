@@ -1,11 +1,13 @@
 package solution.states;
 
+import solution.Context;
+
 public class NotRegisteredState implements State {
 	@Override
 	public void registerCommand() {
 		
 	}
-	
+
 	@Override
 	public void startCommand() {
 		System.out.println("Session not started. Use the command REGISTER <NAME>");
