@@ -3,26 +3,16 @@ package solution.states;
 public class NotStartedState implements State{
 	@Override
 	public void registerCommand() {
-		
+		throw new RuntimeException("Already registered but no game found. To start a new game, use the command START.");
 	}
 
 	@Override
 	public void startCommand() {
-		System.out.println("User registered but no game started. Use the command START");
+		return;
 	}
 
 	@Override
-	public void goCommand() {
-		System.out.println("User registered but no game started. Use the command START");
-	}
-
-	@Override
-	public void genericCommand() {
-		System.out.println("User registered but no game started. Use the command START");
-	}
-
-	@Override
-	public void hintCommand() {
-		System.out.println("User registered but no game started. Use the command START");
+	public void otherCommand(){
+		throw new RuntimeException("Already registered but no game found. To start a new game, use the command START.");
 	}
 }

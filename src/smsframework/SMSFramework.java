@@ -9,17 +9,18 @@ import io.github.lukehutch.fastclasspathscanner.FastClasspathScanner;
 import io.github.lukehutch.fastclasspathscanner.scanner.ScanResult;
 import smsframework.annotations.Regex;
 import smsframework.annotations.RegexHandler;
+import solution.Context;
 
 public class SMSFramework {
 	private HashMap<String, RegexHandler> map = new HashMap();
 	
-	public SMSFramework(String path) throws Exception{
+	public SMSFramework(String path, Context context) throws Exception{
 		ScanResult results = new FastClasspathScanner(path).scan();
 		List<String> allResults = results.getNamesOfClassesWithAnnotation(Regex.class);
 		for(String s : allResults){
 			Class c = Class.forName(s);
 			Regex regexAnnotation = (Regex) c.getAnnotation(Regex.class);
-			map.put(regexAnnotation.regex(), (RegexHandler) c.newInstance());
+			map.put(regexAnnotation.regex(), (RegexHandler) c.getDeclaredConstructor(Object.class).newInstance(context));
 		}
 	}
 

@@ -1,30 +1,18 @@
 package solution.states;
 
-import solution.Context;
-
 public class NotRegisteredState implements State {
 	@Override
 	public void registerCommand() {
-		
+		return;
 	}
 
 	@Override
 	public void startCommand() {
-		System.out.println("Session not started. Use the command REGISTER <NAME>");
+		throw new RuntimeException("Session not started. Use the command REGISTER <NAME>.");
 	}
 
 	@Override
-	public void goCommand() {
-		System.out.println("Session not started. Use the command REGISTER <NAME>");
-	}
-
-	@Override
-	public void genericCommand() {
-		System.out.println("Session not started. Use the command REGISTER <NAME>");
-	}
-
-	@Override
-	public void hintCommand() {
-		System.out.println("Session not started. Use the command REGISTER <NAME>");
+	public void otherCommand(){
+		throw new RuntimeException("Session not started. Use the command REGISTER <NAME>.");
 	}
 }

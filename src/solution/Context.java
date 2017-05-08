@@ -19,24 +19,25 @@ import solution.states.State;
 public class Context {
 	HashMap<String,Object> args;
 	private State state;
+	private String name;
 	private SMSFramework sms;
 	public InputReader inputReader;
 	
 	@Autowired
 	UserRepository ur;
-	
-	public Context(){}
-	
-	public Context(String annotationsPackageName) throws Exception{
+		
+	public Context(){
 		setState(new NotRegisteredState());
 		inputReader = new InputReader();
-		sms = new SMSFramework(annotationsPackageName);
 	}
 	
-	public Context(String annotationsPackageName, String inputFilePath) throws Exception{
+	public Context(String inputFilePath){
 		setState(new NotRegisteredState());
 		inputReader = new InputReader(inputFilePath);
-		sms = new SMSFramework(annotationsPackageName);
+	}
+	
+	public void setSMSFrameworkPath(String annotationsPackageName) throws Exception{
+		sms = new SMSFramework(annotationsPackageName, this);
 	}
 
 	public State getState() {
@@ -48,6 +49,18 @@ public class Context {
 	}
 	
 	public void runCommand(String line) throws Exception{
-		sms.processText(line);
+		if(!(sms == null)){
+			sms.processText(line);
+		} else {
+			throw new RuntimeException("No instance of SMSFramework found.");
+		}
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 }
