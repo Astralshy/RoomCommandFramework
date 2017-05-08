@@ -7,16 +7,16 @@ import smsframework.annotations.RegexHandler;
 import solution.Context;
 
 @Regex(regex="(?i)\\s*hint\\s*")
-public class HintCommand implements RegexHandler{
-	private Context context;
+public class HintCommand extends RegexHandler{
 	
-	public HintCommand(Object c){
-		context = (Context) c;
+	public HintCommand(Object target) {
+		super(target);
 	}
-	
+
 	@Override
 	public void process(Matcher m) throws Exception {
 		try{
+			Context context = (Context) receiverObject;
 			context.getState().otherCommand();
 			System.out.println("HINT");
 		} catch(Exception e){

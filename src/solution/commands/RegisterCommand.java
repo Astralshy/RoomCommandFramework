@@ -8,16 +8,16 @@ import solution.Context;
 import solution.states.NotStartedState;
 
 @Regex(regex="(?i)\\s*register\\s+(\\w+)\\s*")
-public class RegisterCommand implements RegexHandler{
-	private Context context;
-	
-	public RegisterCommand(Object c){
-		context = (Context) c;
+public class RegisterCommand extends RegexHandler{
+		
+	public RegisterCommand(Object target) {
+		super(target);
 	}
-	
+
 	@Override
 	public void process(Matcher m) throws Exception {
 		try{
+			Context context = (Context) receiverObject;
 			context.getState().registerCommand();
 			/*TODO
 			if(user does not exist in db)

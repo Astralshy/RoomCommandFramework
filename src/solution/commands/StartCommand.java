@@ -8,16 +8,16 @@ import solution.Context;
 import solution.states.NotFinishedState;
 
 @Regex(regex="(?i)\\s*start\\s*")
-public class StartCommand implements RegexHandler{
-	private Context context;
+public class StartCommand extends RegexHandler{
 	
-	public StartCommand(Object c){
-		context = (Context) c;
+	public StartCommand(Object target) {
+		super(target);
 	}
-	
+
 	@Override
 	public void process(Matcher m) throws Exception {
 		try{
+			Context context = (Context) receiverObject;
 			context.getState().startCommand();
 			context.setState(new NotFinishedState());
 		} catch (Exception e){

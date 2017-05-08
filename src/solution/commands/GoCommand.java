@@ -7,16 +7,16 @@ import smsframework.annotations.RegexHandler;
 import solution.Context;
 
 @Regex(regex="(?i)\\s*go\\s+(\\w+)\\s*")
-public class GoCommand implements RegexHandler{	
-	private Context context;
-	
-	public GoCommand(Object c){
-		context = (Context) c;
+public class GoCommand extends RegexHandler{	
+		
+	public GoCommand(Object target) {
+		super(target);
 	}
-	
+
 	@Override
 	public void process(Matcher m) throws Exception {
 		try{
+			Context context = (Context) receiverObject;
 			context.getState().otherCommand();
 			System.out.println("GO " + m.group(1));
 		} catch(Exception e){

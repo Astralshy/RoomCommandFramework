@@ -7,16 +7,16 @@ import smsframework.annotations.RegexHandler;
 import solution.Context;
 
 @Regex(regex="(?i)\\s*(?!\\b(go|register|start)\\b)(\\w+)(\\s+(\\w+))?\\s*")
-public class GenericCommand implements RegexHandler{
-	private Context context;
-	
-	public GenericCommand(Object c){
-		context = (Context) c;
+public class GenericCommand extends RegexHandler{
+		
+	public GenericCommand(Object target) {
+		super(target);
 	}
-	
+
 	@Override
 	public void process(Matcher m) throws Exception {
 		try{
+			Context context = (Context) receiverObject;
 			context.getState().otherCommand();
 			if(m.group(4) == null){
 				System.out.println("One word command: " + m.group(2));
