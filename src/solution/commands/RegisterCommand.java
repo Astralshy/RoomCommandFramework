@@ -7,7 +7,7 @@ import smsframework.annotations.RegexHandler;
 import solution.Context;
 import solution.states.NotStartedState;
 
-@Regex(regex="(?i)\\s*register\\s+(\\w+)\\s*")
+@Regex(regex="(?i)\\s*register\\s+(\\w+)\\s*", priority=1)
 public class RegisterCommand extends RegexHandler{
 		
 	public RegisterCommand(Object target) {

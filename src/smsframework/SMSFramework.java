@@ -1,7 +1,8 @@
 package smsframework;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.PriorityQueue;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -12,15 +13,23 @@ import smsframework.annotations.RegexHandler;
 import solution.Context;
 
 public class SMSFramework {
-	private HashMap<String, RegexHandler> map = new HashMap();
+	private LinkedHashMap<String, RegexHandler> map = new LinkedHashMap<String, RegexHandler>();
 	
 	public SMSFramework(String path, Context context) throws Exception{
 		ScanResult results = new FastClasspathScanner(path).scan();
 		List<String> allResults = results.getNamesOfClassesWithAnnotation(Regex.class);
+		PriorityQueue<Command> pq = new PriorityQueue<Command>();
 		for(String s : allResults){
 			Class c = Class.forName(s);
 			Regex regexAnnotation = (Regex) c.getAnnotation(Regex.class);
-			map.put(regexAnnotation.regex(), (RegexHandler) c.getDeclaredConstructor(Object.class).newInstance(context));
+			Command command = new Command(s, regexAnnotation.priority());
+			pq.add(command);
+		}
+		while(!pq.isEmpty()){
+			Command c = pq.poll();
+			Class command = Class.forName(c.getClassName());
+			Regex regexAnnotation = (Regex) command.getAnnotation(Regex.class);
+			map.put(regexAnnotation.regex(), (RegexHandler) command.getDeclaredConstructor(Object.class).newInstance(context));
 		}
 	}
 

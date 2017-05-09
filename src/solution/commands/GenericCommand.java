@@ -6,7 +6,7 @@ import smsframework.annotations.Regex;
 import smsframework.annotations.RegexHandler;
 import solution.Context;
 
-@Regex(regex="(?i)\\s*(?!\\b(go|register|start)\\b)(\\w+)(\\s+(\\w+))?\\s*")
+@Regex(regex="(?i)\\s*(\\w+)(\\s+(\\w+))?\\s*", priority=5)
 public class GenericCommand extends RegexHandler{
 		
 	public GenericCommand(Object target) {
@@ -18,10 +18,10 @@ public class GenericCommand extends RegexHandler{
 		try{
 			Context context = (Context) receiverObject;
 			context.getState().otherCommand();
-			if(m.group(4) == null){
-				System.out.println("One word command: " + m.group(2));
+			if(m.group(3) == null){
+				System.out.println("One word command: " + m.group(1));
 			} else {
-				System.out.println("Command with params: " + m.group(2) + " " + m.group(4));
+				System.out.println("Command with params: " + m.group(1) + " " + m.group(3));
 			}
 		} catch(Exception e){
 			System.out.println(e.getMessage());
