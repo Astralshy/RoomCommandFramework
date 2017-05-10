@@ -15,8 +15,8 @@ public class Demo {
 		Context c = new Context();
 		//Context c = new Context("./src/demo/Input.txt");
 		c.setSMSFrameworkPath("solution.commands");
-		while(c.inputReader.readerNotFinished()){
-			c.runCommand(c.inputReader.readLine());
+		while(c.readerNotFinished()){
+			c.runCommand(c.readerReadLine());
 		}
 	}
 }

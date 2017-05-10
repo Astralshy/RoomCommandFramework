@@ -21,7 +21,7 @@ public class Context {
 	private State state;
 	private String name;
 	private SMSFramework sms;
-	public InputReader inputReader;
+	private InputReader inputReader;
 	
 	@Autowired
 	UserRepository ur;
@@ -38,6 +38,18 @@ public class Context {
 	
 	public void setSMSFrameworkPath(String annotationsPackageName) throws Exception{
 		sms = new SMSFramework(annotationsPackageName, this);
+	}
+	
+	public void setInputReader(InputReader ir){
+		inputReader = ir;
+	}
+	
+	public String readerReadLine(){
+		return inputReader.readLine();
+	}
+	
+	public boolean readerNotFinished(){
+		return inputReader.readerNotFinished();
 	}
 
 	public State getState() {
