@@ -1,5 +1,6 @@
 package solution.commands;
 
+import java.util.HashMap;
 import java.util.regex.Matcher;
 
 import smsframework.annotations.Regex;
@@ -18,11 +19,15 @@ public class GenericCommand extends RegexHandler{
 		try{
 			Context context = (Context) receiverObject;
 			context.getState().otherCommand();
-			if(m.group(3) == null){
-				System.out.println("One word command: " + m.group(1));
-			} else {
-				System.out.println("Command with params: " + m.group(1) + " " + m.group(3));
+			HashMap<String, Object> output;
+			if(m.group(3) != null){
+				output = context.getRcm().processRoom(context.getCurrentRoom(), context.getGameState(), m.group(1) + " " +m.group(3));
+			}else{
+				output = context.getRcm().processRoom(context.getCurrentRoom(), context.getGameState(), m.group(1));
 			}
+			context.setGameState((int)output.get("status"));
+			System.out.print(output.get("message"));
+			
 		} catch(Exception e){
 			System.out.println(e.getMessage());
 		}

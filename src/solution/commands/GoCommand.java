@@ -1,5 +1,6 @@
 package solution.commands;
 
+import java.util.HashMap;
 import java.util.regex.Matcher;
 
 import smsframework.annotations.Regex;
@@ -19,7 +20,8 @@ public class GoCommand extends RegexHandler{
 			Context context = (Context) receiverObject;
 			context.getState().otherCommand();
 			if(m.group(1).matches("Room[1-5]")){
-				System.out.println("GO " + m.group(1));
+				context.setCurrentRoom(m.group(1));
+				System.out.print(context.getRcm().processRoom(context.getCurrentRoom(), context.getGameState(), "checkRoom").get("message"));
 			}
 			else{
 				System.out.println("Invalid Room.");

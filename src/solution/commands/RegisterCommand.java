@@ -27,7 +27,7 @@ public class RegisterCommand extends RegexHandler{
 			else{
 				context.setState(new NotFinishedState());
 				System.out.println("Welcome back, " + m.group(1) + ".");
-				System.out.print(context.getRcm().processRoom("Room2", context.getGameState(), "checkRoom").get("message"));
+				System.out.print(context.getRcm().processRoom(context.getCurrentRoom(), context.getGameState(), "checkRoom").get("message"));
 			}
 		} catch (Exception e){
 			System.out.println(e.getMessage());

@@ -18,7 +18,7 @@ public class HintCommand extends RegexHandler{
 		try{
 			Context context = (Context) receiverObject;
 			context.getState().otherCommand();
-			System.out.println("HINT");
+			System.out.print(context.getRcm().processRoom(context.getCurrentRoom(), context.getGameState(), "checkRoom").get("message"));
 		} catch(Exception e){
 			System.out.println(e.getMessage());;
 		}
