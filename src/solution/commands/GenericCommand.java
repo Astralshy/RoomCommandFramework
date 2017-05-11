@@ -6,7 +6,7 @@ import smsframework.annotations.Regex;
 import smsframework.annotations.RegexHandler;
 import solution.Context;
 
-@Regex(regex="(?i)\\s*(\\w+)(\\s+(\\w+))?\\s*", priority=5)
+@Regex(regex="(?i)\\s*(\\w+)(\\s+(\\w+))?\\s*", priority=6)
 public class GenericCommand extends RegexHandler{
 		
 	public GenericCommand(Object target) {

@@ -5,6 +5,7 @@ import java.util.regex.Matcher;
 import smsframework.annotations.Regex;
 import smsframework.annotations.RegexHandler;
 import solution.Context;
+import solution.states.NotFinishedState;
 import solution.states.NotStartedState;
 
 @Regex(regex="(?i)\\s*register\\s+(\\w+)\\s*", priority=1)
@@ -19,16 +20,15 @@ public class RegisterCommand extends RegexHandler{
 		try{
 			Context context = (Context) receiverObject;
 			context.getState().registerCommand();
-			/*TODO
-			if(user does not exist in db)
+			if(!context.userExists(m.group(1))){
 				context.setState(new NotStartedState());
-				sysout("Welcome to DragonSMS")
-			else
+				System.out.println("Welcome to DragonSMS, " + m.group(1) + ".");
+			}
+			else{
 				context.setState(new NotFinishedState());
-				sysout("Welcome back to DragonSMS")
-			*/
-			context.setState(new NotStartedState());
-			System.out.println("REGISTERING " + m.group(1));
+				System.out.println("Welcome back, " + m.group(1) + ".");
+				System.out.print(context.getRcm().processRoom("Room2", context.getGameState(), "checkRoom").get("message"));
+			}
 		} catch (Exception e){
 			System.out.println(e.getMessage());
 		}

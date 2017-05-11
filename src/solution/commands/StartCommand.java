@@ -20,6 +20,8 @@ public class StartCommand extends RegexHandler{
 			Context context = (Context) receiverObject;
 			context.getState().startCommand();
 			context.setState(new NotFinishedState());
+			context.resetGame();
+			System.out.print(context.getRcm().processRoom(context.getCurrentRoom(), context.getGameState(), "checkRoom").get("message"));
 		} catch (Exception e){
 			System.out.println(e.getMessage());
 		}
